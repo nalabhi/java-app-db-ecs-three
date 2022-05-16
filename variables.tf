@@ -12,9 +12,14 @@ variable "region" {
 }
 
 # TODO: support multiple availability zones, and default to it.
-variable "availability_zone" {
+variable "availability_zone1" {
     description = "The availability zone"
     default = "us-east-1a"
+}
+
+variable "availability_zone2" {
+    description = "The availability zone"
+    default = "us-east-1b"
 }
 
 variable "ecs_cluster_name" {

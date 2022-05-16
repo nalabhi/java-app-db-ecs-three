@@ -22,18 +22,30 @@ resource "aws_route_table" "external" {
     }
 }
 
-resource "aws_route_table_association" "external-main" {
-    subnet_id = "${aws_subnet.main.id}"
+resource "aws_route_table_association" "external-main1" {
+    subnet_id = "${aws_subnet.main1.id}"
+    route_table_id = "${aws_route_table.external.id}"
+}
+
+resource "aws_route_table_association" "external-main2" {
+    subnet_id = "${aws_subnet.main2.id}"
     route_table_id = "${aws_route_table.external.id}"
 }
 
 # TODO: figure out how to support creating multiple subnets, one for each
 # availability zone.
-resource "aws_subnet" "main" {
+resource "aws_subnet" "main1" {
     vpc_id = "${aws_vpc.main.id}"
     cidr_block = "192.168.1.0/24"
-    availability_zone = "${var.availability_zone}"
+    availability_zone = "${var.availability_zone1}"
 }
+
+resource "aws_subnet" "main2" {
+    vpc_id = "${aws_vpc.main.id}"
+    cidr_block = "192.168.2.0/24"
+    availability_zone = "${var.availability_zone2}"
+}
+
 
 resource "aws_internet_gateway" "main" {
     vpc_id = "${aws_vpc.main.id}"
@@ -90,7 +102,6 @@ resource "aws_security_group" "ecs" {
     }
 }
 
-
 resource "aws_ecs_cluster" "main" {
     name = "${var.ecs_cluster_name}"
 }
@@ -103,7 +114,7 @@ resource "aws_autoscaling_group" "ecs-cluster" {
     desired_capacity = "${var.autoscale_desired}"
     health_check_type = "EC2"
     launch_configuration = "${aws_launch_configuration.ecs.name}"
-    vpc_zone_identifier = ["${aws_subnet.main.id}"]
+    vpc_zone_identifier = [aws_subnet.main1.id,aws_subnet.main2.id]
     #vpc_zone_identifier = [element(aws_subnet.main.*id, count.index),]
     #vpc_zone_identifier = ["${aws_subnet.main.id.all.id}"]    
 }
