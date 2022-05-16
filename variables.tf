@@ -41,13 +41,13 @@ variable "autoscale_max" {
 }
 
 variable "autoscale_desired" {
-    default = "4"
+    default = "2"
     description = "Desired autoscale (number of EC2)"
 }
 
 
 variable "instance_type" {
-    default = "t2.micro"
+    default = "t3a.medium"
 }
 
 #variable "ssh_pubkey_file" {
