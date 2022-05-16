@@ -1,7 +1,7 @@
 [
     {
         "name": "test-http",
-        "image": "alexgaynor/test-http",
+        "image": "698788855670.dkr.ecr.us-east-1.amazonaws.com/docker-app-registry",
         "cpu": 10,
         "memory": 512,
         "links": [],
