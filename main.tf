@@ -4,10 +4,10 @@ provider "aws" {
     region = "${var.region}"
 }
 
-resource "aws_key_pair" "abc" {
-    key_name = "abc-key"
-    public_key = "${file(var.ssh_pubkey_file)}"
-}
+#resource "aws_key_pair" "abc" {
+#    key_name = "abc-key"
+#    public_key = "${file(var.ssh_pubkey_file)}"
+#}
 
 resource "aws_vpc" "main" {
     cidr_block = "10.0.0.0/16"
