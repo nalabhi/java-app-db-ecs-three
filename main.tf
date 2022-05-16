@@ -103,8 +103,8 @@ resource "aws_autoscaling_group" "ecs-cluster" {
     desired_capacity = "${var.autoscale_desired}"
     health_check_type = "EC2"
     launch_configuration = "${aws_launch_configuration.ecs.name}"
-    #vpc_zone_identifier = ["${aws_subnet.main.id}"]
-    vpc_zone_identifier = [element(aws_subnet.main.*id, count.index),]
+    vpc_zone_identifier = ["${aws_subnet.main.*id}"]
+    #vpc_zone_identifier = [element(aws_subnet.main.*id, count.index),]
     #vpc_zone_identifier = ["${aws_subnet.main.id.all.id}"]    
 }
 
