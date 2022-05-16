@@ -107,7 +107,7 @@ resource "aws_ecs_cluster" "main" {
 }
 
 resource "aws_autoscaling_group" "ecs-cluster" {
-    availability_zones = ["${var.availability_zone}"]
+    availability_zones = [var.availability_zone1,var.availability_zone2]
     name = "ECS ${var.ecs_cluster_name}"
     min_size = "${var.autoscale_min}"
     max_size = "${var.autoscale_max}"
