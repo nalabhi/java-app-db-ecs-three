@@ -52,7 +52,7 @@ variable "autoscale_desired" {
 
 
 variable "instance_type" {
-    default = "t3a.medium"
+    default = "t3a.large"
 }
 
 #variable "ssh_pubkey_file" {
